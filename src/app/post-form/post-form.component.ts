@@ -1,6 +1,6 @@
-import {Component,OnInit} from '@angular/core';
-import {FormBuilder, FormControl, Validators} from '@angular/forms';
-import { User } from '../user'
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { User } from '../user';
 import { UserService } from '../user.service';
 /** @title Form field with error messages */
 @Component({
@@ -10,23 +10,23 @@ import { UserService } from '../user.service';
 })
 export class PostFormComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
-  phone = new FormControl('',[Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]);
-  name = new FormControl('',[Validators.required,  Validators.minLength(3), Validators.pattern('^[a-z,A-Z]*$')]);
+  phone = new FormControl('', [Validators.required, Validators.minLength(10), Validators.pattern('^[0-9]*$')]);
+  name = new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('^[a-z A-Z]*$')]);
   signupForm = this.formBuilder.group({
     name: this.name,
-    phone:this.phone,
-    email:this.email
+    phone: this.phone,
+    email: this.email
   });
   constructor(
-    private formBuilder: FormBuilder,private _UserService: UserService
-    ) {}
-    onSubmit():void{
-      console.log(this.signupForm.value)
-      var body= JSON.stringify(this.signupForm.value);
-      console.log(body)
+    private formBuilder: FormBuilder, private _UserService: UserService
+  ) { }
+  onSubmit(): void {
+    console.log(this.signupForm.value)
+    var body = JSON.stringify(this.signupForm.value);
+    console.log(body)
 
-    }
-    listuser:User[];
+  }
+  listuser: User[];
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
@@ -36,28 +36,28 @@ export class PostFormComponent implements OnInit {
   }
   ngOnInit() {
     this._UserService.getuser().subscribe(
-      data=>{
-            this.listuser= data;
-            // console.log(this.listuser)
+      data => {
+        this.listuser = data;
+        // console.log(this.listuser)
       }
     );
 
   }
 
-  submitData(){
-    if(this.phone.value || this.email.value || this.phone.value){
+  submitData() {
+    if (this.phone.value || this.email.value || this.phone.value) {
       let body: any = {
         name: this.name.value,
         email: this.email.value,
         phone: this.phone.value
       };
 
-      this._UserService.postUser(body).subscribe(data =>{
+      this._UserService.postUser(body).subscribe(data => {
         console.log(data);
-      }, err=>{
+      }, err => {
         console.log('err', err)
       });
-    }else{
+    } else {
       console.log('Please add data properly')
     }
 
