@@ -1,0 +1,17 @@
+GET /api/contacts: will give all contacts stored in database
+
+
+GET /api/contacts/<contact_id>: will give a specific contact with contact_id.
+
+
+POST /api/contacts : contact can create a new contact
+
+
+PATCH /api/contacts/<contact_id>: update a contact partially
+
+
+DELETE /api/contacts/<contact_id>: delete a contact
+
+
+PUT /api/contacts/<contact_id>: update a contact completely
+
