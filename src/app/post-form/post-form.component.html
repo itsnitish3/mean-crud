@@ -1,1 +1,35 @@
-<p>post-form works!</p>
+<div class="container">
+  <form  [formGroup]="signupForm" (ngSubmit)="onSubmit()" >
+  <div class="example-container">
+    <mat-form-field appearance="outline">
+      <mat-label>Outline form field</mat-label>
+      <input matInput placeholder="Placeholder"  [formControl]="name"  required >
+      <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+    </div>
+    <div class="example-container">
+      <mat-form-field hintLabel="Max 10 characters" appearance="outline">
+        <mat-label>Enter some input</mat-label>
+        <input matInput #input maxlength="10" placeholder="Ex. Nougat" [formControl]="phone" required>
+        <mat-hint align="end">{{input.value?.length || 0}}/10</mat-hint>
+      </mat-form-field>
+    </div>
+    <div class="example-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Enter your email</mat-label>
+        <input matInput placeholder="pat@example.com" [formControl]="email" required>
+        <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="!signupForm.valid"
+    (click)="submitData()">Sign Up</button>
+  </form>
+</div>
+<hr>
+<ul *ngFor="let item of listuser">
+  <br>
+  <li>{{item.name}}</li>
+  <li>{{item.phone}}</li>
+  <li>{{item.email}}</li>
+  <br>
+</ul>
