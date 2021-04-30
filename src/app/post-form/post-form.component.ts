@@ -24,7 +24,12 @@ export class PostFormComponent implements OnInit {
     console.log(this.signupForm.value)
     var body = JSON.stringify(this.signupForm.value);
     console.log(body)
+    // this.signupForm.resetForm();
 
+  //   if (this.service.formData.paymentDetailId == 0)
+  //   this.insertRecord(form);
+  // else
+  //   this.updateRecord(form);
   }
   listuser: User[];
 
@@ -63,5 +68,9 @@ export class PostFormComponent implements OnInit {
 
 
   }
+  // resetForm(signupForm: signupForm) {
+  //   signupForm.form.reset();
+  //   // this.service.formData = new PaymentDetail();
+  // }
 }
 

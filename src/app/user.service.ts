@@ -15,23 +15,12 @@ return this.httpclient.get(environment.apiUrl+"/api/get")
 let param1= new HttpParams().set('id','6087ef92fd786b7a4631af50');
 return this.httpclient.get(environment.apiUrl+"/api/get/id",{params:param1})
   }
-  // postuser(): Observable<any>{
-  //   this.httpclient.post<any>('http://localhost:4300/api/create', { }).subscribe(data => {
-  //           // this.postId = data.id;
-  //           return this.data = data;
-  //       })
+  // putPaymentDetail() {
+  //   return this.http.put(`${this.baseURL}/${this.formData.paymentDetailId}`, this.formData);
   // }
-  // postuser():Observable{
-  //  this.httpclient.post('http://localhost:4300/api/create',body).subscribe(
-  //     response=>{
-  //       console.log(response)
-  //     return this.User = response
-  //     },err=>{
-  //       console.log(err)
-  //     }
-  //   )
+  // putuser():Observable<any>{
+  //   return this.httpclient.put(environment.apiUrl+"/api")
   // }
-
   postUser(body:any) : Observable<any>{
     return this.httpclient.post(environment.apiUrl+'/api/create', body);
   }

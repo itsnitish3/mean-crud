@@ -12,8 +12,8 @@ router.post('/create', userController.create);
 router.get('/get/id', userController.findOne);
 
 // Update a contact with id
-// router.put('/:id', userController.update);
-// 
+router.put('/update:id', userController.update);
+//
 // Delete a contact with id
 // router.delete('/:id', userController.delete);
 
