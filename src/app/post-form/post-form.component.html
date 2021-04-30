@@ -1,12 +1,12 @@
 <div class="container">
-  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="signupForm" (ngSubmit)="createuser()">
     <div class="example-container">
       <mat-form-field appearance="outline">
         <mat-label>Outline form field</mat-label>
         <input
           matInput
           placeholder="Placeholder"
-          [formControl]="name"
+          formControlName="name"
           required
         />
         <mat-hint>No special characters </mat-hint>
@@ -20,7 +20,7 @@
           #input
           maxlength="10"
           placeholder="Enter youtr phone number "
-          [formControl]="phone"
+        formControlName="phone"
           required
         />
         <mat-hint align="end">{{ input.value?.length || 0 }}/10</mat-hint>
@@ -32,7 +32,7 @@
         <input
           matInput
           placeholder="pat@example.com"
-          [formControl]="email"
+          formControlName="email"
           type="email"
           required
         />
@@ -44,28 +44,44 @@
       color="primary"
       type="submit"
       [disabled]="!signupForm.valid"
-      (click)="submitData()"
+      (click)="createuser()"
     >
       Sign Up
     </button>
+    <button
+    mat-raised-button
+    color="primary"
+    type="submit"
+
+    (click)="updateuser()"
+  >
+    Update User
+  </button>
   </form>
+<hr>
+name={{data?.name}}    |     phone{{data?.phone}}     |   email={{data?.email}}
 <hr>
   <table class="table">
     <thead class="thead-light">
         <tr>
+          <th>Update</th>
             <th>Name</th>
             <th>Phone Number</th>
             <th>Email</th>
-            <th></th>
+            <th>Delete</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let item of listuser">
+          <td>
+            <mat-icon (click)="getuser(item)">update</mat-icon>
+          </td>
             <td>{{ item.name }}</td>
             <td>{{ item.phone }}</td>
             <td>{{ item.email }}</td>
              <td>
-                <mat-icon>delete</mat-icon>
+                <mat-icon (click)="deleteuser(item._id)">delete</mat-icon>
+
             </td>
         </tr>
     </tbody>

@@ -39,18 +39,18 @@ const options = {
     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
     next();
   });
-  
+
 
 // define a root/default route
 app.get('/', (req, res) => {
     res.send({hi: "hi", "message": [    "GET /api/contacts: will give all contacts stored in database",    "",    "",    "GET /api/contacts/<contact_id>: will give a specific contact with contact_id.",    "",    "",    "POST /api/contacts : contact can create a new contact",    "",    "",    "PATCH /api/contacts/<contact_id>: update a contact partially",    "",    "",    "DELETE /api/contacts/<contact_id>: delete a contact",    "",    "",    "PUT /api/contacts/<contact_id>: update a contact completely"]});
-    
+
 });
 
 // Require Users routes
-const contactRoutes = require('./routes/user.routes')
+const userRoutes = require('./routes/user.routes')
 // using as middleware
-app.use('/api', contactRoutes)
+app.use('/api', userRoutes)
 
 // listen for requests
 app.listen(port, () => {

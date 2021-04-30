@@ -9,12 +9,12 @@ router.get('/get', userController.findAll);
 router.post('/create', userController.create);
 
 // Retrieve a single contact with id
-router.get('/get/id', userController.findOne);
+router.get('/getuser/:id', userController.findOne);
 
 // Update a contact with id
-router.put('/update:id', userController.update);
+router.put('/update/:id', userController.update);
 //
 // Delete a contact with id
-// router.delete('/:id', userController.delete);
+router.delete('/delete/:id', userController.delete);
 
 module.exports = router
