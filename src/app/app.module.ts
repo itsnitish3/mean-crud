@@ -14,13 +14,16 @@ import {ReactiveFormsModule} from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './user.service';
-import { PostFormComponent } from './post-form/post-form.component'
+import { PostFormComponent } from './post-form/post-form.component';
+import { AppRoutingModule } from './app-routing.module';
+import { FileComponent } from './file/file.component'
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FormComponent,
-    PostFormComponent
+    PostFormComponent,
+    FileComponent
   ],
   imports: [
 
@@ -33,7 +36,8 @@ import { PostFormComponent } from './post-form/post-form.component'
     MatInputModule,
     ReactiveFormsModule,
     NgbModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

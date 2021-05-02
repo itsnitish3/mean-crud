@@ -109,18 +109,19 @@ export class PostFormComponent implements OnInit {
   }
   updateuser() {
     let body: any = {
-      name: this.signupForm.get('name').value,
+      name: this.name.value,
       email: this.email.value,
       phone: this.phone.value,
     };
     console.log("Updated User Value",body)
-    this._UserService.updateuser(this.idOfDataToBeUpdated,body).subscribe(
+    this._UserService.updateUser(this.idOfDataToBeUpdated,body).subscribe(
       res => {
         // this.signupForm.reset();
+        console.log(this.idOfDataToBeUpdated);
+        // console.warn(body);
         this._UserService.refreshList((data) => {
           this.listuser = data;
         });
-        // this.toastr.info('Updated successfully', 'Payment Detail Register')
       },
       err => { console.log(err); }
     );

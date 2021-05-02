@@ -22,9 +22,9 @@ export class UserService {
   getuser(id: any): Observable<any> {
     return this.httpclient.get(environment.apiUrl + '/api/getuser/' + id);
   }
-  updateuser(id: any , body: any): Observable<any> {
+  updateUser(id: any , body: any): Observable<any> {
     return this.httpclient.put( `${environment.apiUrl + '/api/update'}/${id}`, body);
-  }
+    }
   deleteuser(id: any): Observable<any> {
     return this.httpclient.delete(
       `${environment.apiUrl + '/api/delete'}/${id}`
