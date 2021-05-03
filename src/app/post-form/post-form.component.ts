@@ -28,25 +28,18 @@ export class PostFormComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private _UserService: UserService
-  ) {
+  ) {}
 
-  }
-
-  onSubmit(): void {
-    console.log(this.signupForm.value);
-    var body = JSON.stringify(this.signupForm.value);
-    console.log(body);
-    // this.signupForm.resetForm();
-
-    //   if (this.service.formData.paymentDetailId == 0)
-    //   this.insertRecord(form);
-    // else
-    //   this.updateRecord(form);
+  onSubmit() {
+    if (!this.idOfDataToBeUpdated) this.createuser();
+    else this.updateuser();
+    this._UserService.refreshList((data) => {
+      this.listuser = data;
+    });
   }
   listuser: User[];
   data;
-  idOfDataToBeUpdated : string=''
-
+  idOfDataToBeUpdated: string = '';
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
@@ -65,7 +58,7 @@ export class PostFormComponent implements OnInit {
   //   if (this._id)
   // }
 
-  createuser(){
+  createuser() {
     if (this.phone.value || this.email.value || this.phone.value) {
       let body: any = {
         name: this.name.value,
@@ -97,15 +90,15 @@ export class PostFormComponent implements OnInit {
     });
   }
   getuser(data: any) {
-    // this._UserService.getuser(id).subscribe((res) => {
-      // this.data = res;
-      this.idOfDataToBeUpdated = data._id
+    this._UserService.getuser(data._id).subscribe((res) => {
+      this.data = res;
+      this.idOfDataToBeUpdated = data._id;
       this.signupForm.setValue({
         name: data.name,
         phone: data.phone,
         email: data.email,
       });
-    // });
+    });
   }
   updateuser() {
     let body: any = {
@@ -113,17 +106,19 @@ export class PostFormComponent implements OnInit {
       email: this.email.value,
       phone: this.phone.value,
     };
-    console.log("Updated User Value",body)
-    this._UserService.updateUser(this.idOfDataToBeUpdated,body).subscribe(
-      res => {
-        // this.signupForm.reset();
-        console.log(this.idOfDataToBeUpdated);
-        // console.warn(body);
-        this._UserService.refreshList((data) => {
-          this.listuser = data;
-        });
-      },
-      err => { console.log(err); }
-    );
+    console.log('Updated User Value', this.idOfDataToBeUpdated);
+    this._UserService
+      .updateUser(this.idOfDataToBeUpdated, body)
+      .subscribe
+      // body => {
+      //   // this.signupForm.reset();
+      //   console.log(this.idOfDataToBeUpdated);
+      //   // console.warn(body);
+      //   this._UserService.refreshList((data) => {
+      //     this.listuser = data;
+      //   });
+      // },
+      // err => { console.log(err); }
+      ();
   }
 }

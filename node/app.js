@@ -1,10 +1,31 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+const fs = require('fs');
+const multer = require('multer');
+const path = require('path')
+
+
+var storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    var dir = "./uploads";
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir);
+      // console.log(dir)
+    }
+    callback(null, dir);
+  },
+
+  filename: function (req, file, callback) {
+    callback(null,file.originalname);
+
+},
+});
+
+var upload = multer({ storage: storage }).single('file');
 
 // create express app
 const app = express();
 
-// Setup server port
+app.use('/file', express.static(path.join(__dirname, 'uploads')))// Setup server port
 const port = process.env.PORT || 4300;
 
 // parse requests of content-type - application/x-www-form-urlencoded
@@ -51,6 +72,16 @@ app.get('/', (req, res) => {
 const userRoutes = require('./routes/user.routes')
 // using as middleware
 app.use('/api', userRoutes)
+
+app.post("/api/upload", function (req, res, ) {
+  upload(req, res, function (err) {
+    if (err) {
+      return res.end("Something went wrong:(");
+    }
+res.send(req.file.filename);
+  });
+});
+
 
 // listen for requests
 app.listen(port, () => {
